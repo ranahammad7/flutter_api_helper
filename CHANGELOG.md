@@ -1,8 +1,3 @@
-```markdown
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
 ## [1.0.0] - 2025-07-27
 
 ### Added
@@ -19,15 +14,14 @@ All notable changes to this project will be documented in this file.
 - Comprehensive test suite
 - Full documentation and examples
 
-### Features
-Features
-✅ Simple API - Intuitive methods for all HTTP operations
-✅ Smart Caching - Memory and disk caching with configurable TTL
-✅ Auto Retry - Exponential backoff for failed requests
-✅ Token Management - Automatic token refresh and injection
-✅ File Operations - Upload/download with progress tracking
-✅ Network Aware - Built-in connectivity checking
-✅ Widget Integration - Ready-to-use Flutter widgets
-✅ Type Safe - Full generic type support
-✅ Interceptors - Custom request/response processing
-✅ Error Handling - Comprehensive error types and handling
+### Highlights
+- ✅ **Simple API** – Intuitive methods for all HTTP operations
+- ✅ **Smart Caching** – Memory and disk caching with configurable TTL
+- ✅ **Auto Retry** – Exponential backoff for failed requests
+- ✅ **Token Management** – Automatic token refresh and injection
+- ✅ **File Operations** – Upload/download with progress tracking
+- ✅ **Network Aware** – Built-in connectivity checking
+- ✅ **Widget Integration** – Ready-to-use Flutter widgets
+- ✅ **Type Safe** – Full generic type support
+- ✅ **Interceptors** – Custom request/response processing
+- ✅ **Error Handling** – Comprehensive error types and handling
