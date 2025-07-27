@@ -1,0 +1,819 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter API Helper - Hero Image</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .hero-container {
+            width: 1200px;
+            height: 630px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0175C2 0%, #01579B 100%);
+            color: white;
+            padding: 24px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .content {
+            display: flex;
+            height: calc(100% - 120px);
+        }
+
+        .code-section {
+            flex: 1;
+            background: #1e1e1e;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-header {
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-header::before {
+            content: "⚡";
+            font-size: 16px;
+        }
+
+        .code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+
+        .code .comment {
+            color: #6a9955;
+        }
+
+        .code .keyword {
+            color: #569cd6;
+        }
+
+        .code .string {
+            color: #ce9178;
+        }
+
+        .code .function {
+            color: #dcdcaa;
+        }
+
+        .code .type {
+            color: #4ec9b0;
+        }
+
+        .code .property {
+            color: #9cdcfe;
+        }
+
+        .app-section {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            background: #000;
+            border-radius: 28px;
+            padding: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: #0175C2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .app-bar {
+            height: 56px;
+            background: #0175C2;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .app-bar h2 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .app-content {
+            padding: 16px;
+            height: calc(100% - 100px);
+            overflow: hidden;
+        }
+
+        .todo-item {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .todo-item:nth-child(2) {
+            border-left-color: #FF9800;
+        }
+
+        .todo-item:nth-child(3) {
+            border-left-color: #2196F3;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            background: #4CAF50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .todo-text {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .loading-indicator {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #e3f2fd;
+            border-top: 2px solid #0175C2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .features-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .features-badge div {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+            color: #555;
+        }
+
+        .features-badge div:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-icon {
+            font-size: 14px;
+        }
+
+        .download-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0175C2;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(1, 117, 194, 0.3);
+        }
+
+        .download-btn:hover {
+            background: #01579B;
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 6px 16px rgba(1, 117, 194, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero-container">
+        <div class="header">
+            <h1>Flutter API Helper</h1>
+            <p>Smart HTTP Client with Caching, Retry Logic & Widget Integration</p>
+        </div>
+
+        <div class="content">
+            <div class="code-section">
+                <div class="code-header">Simple & Powerful API</div>
+                <div class="code">
+                    <span class="comment">// Configure once, use everywhere</span>
+                    <span class="type">ApiHelper</span>.<span class="function">configure</span>(<br>
+                    &nbsp;&nbsp;<span class="type">ApiConfig</span>(<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">baseUrl</span>: <span
+                        class="string">'https://api.yourapp.com'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">enableLogging</span>: <span
+                        class="keyword">true</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">cacheConfig</span>: <span
+                        class="type">CacheConfig</span>(<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="property">duration</span>: <span
+                        class="type">Duration</span>(<span class="property">minutes</span>: <span
+                        class="string">5</span>),<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;),<br>
+                    &nbsp;&nbsp;),<br>
+                    );<br><br>
+
+                    <span class="comment">// Make requests with ease</span><br>
+                    <span class="keyword">final</span> todos = <span class="keyword">await</span> <span
+                        class="type">ApiHelper</span>.<span class="function">get</span>&lt;<span
+                        class="type">List</span>&gt;(<span class="string">'/todos'</span>);<br><br>
+
+                    <span class="comment">// Create with validation</span><br>
+                    <span class="keyword">final</span> newTodo = <span class="keyword">await</span> <span
+                        class="type">ApiHelper</span>.<span class="function">post</span>(<br>
+                    &nbsp;&nbsp;<span class="string">'/todos'</span>,<br>
+                    &nbsp;&nbsp;<span class="property">data</span>: {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'title'</span>: <span class="string">'Learn Flutter API
+                        Helper'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'completed'</span>: <span
+                        class="keyword">false</span>,<br>
+                    &nbsp;&nbsp;},<br>
+                    );<br><br>
+
+                    <span class="comment">// Widget integration</span><br>
+                    <span class="type">ApiBuilder</span>&lt;<span class="type">List</span>&gt;(<br>
+                    &nbsp;&nbsp;<span class="property">future</span>: <span class="type">ApiHelper</span>.<span
+                        class="function">get</span>(<span class="string">'/todos'</span>),<br>
+                    &nbsp;&nbsp;<span class="property">builder</span>: (todos) => <span
+                        class="type">ListView</span>(...),<br>
+                    &nbsp;&nbsp;<span class="property">loading</span>: <span
+                        class="type">CircularProgressIndicator</span>(),<br>
+                    &nbsp;&nbsp;<span class="property">error</span>: (error) => <span
+                        class="type">ErrorWidget</span>(error),<br>
+                    );
+                </div>
+            </div>
+
+            <div class="app-section">
+                <div class="features-badge">
+                    <div><span class="feature-icon">⚡</span> Smart Caching</div>
+                    <div><span class="feature-icon">🔄</span> Auto Retry</div>
+                    <div><span class="feature-icon">📱</span> Widget Ready</div>
+                    <div><span class="feature-icon">🛡️</span> Error Handling</div>
+                </div>
+
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="app-bar">
+                            <h2>Todo App</h2>
+                        </div>
+                        <div class="app-content">
+                            <div class="todo-item">
+                                <div class="checkbox">✓</div>
+                                <div class="todo-text">Learn Flutter API Helper</div>
+                            </div>
+                            <div class="todo-item">
+                                <div class="checkbox">✓</div>
+                                <div class="todo-text">Implement smart caching</div>
+                            </div>
+                            <div class="todo-item">
+                                <div class="checkbox">✓</div>
+                                <div class="todo-text">Add retry logic</div>
+                            </div>
+                            <div class="todo-item">
+                                <div class="checkbox" style="background: #ddd; color: #999;">○</div>
+                                <div class="todo-text">Build amazing apps</div>
+                            </div>
+                        </div>
+                        <div class="loading-indicator"></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter API Helper - Features Overview</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .features-container {
+            width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0175C2 0%, #01579B 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .header .version {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            background: #f8f9fa;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 32px;
+            border-right: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            background: #f8f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(1, 117, 194, 0.1);
+        }
+
+        .feature-card:nth-child(even) {
+            border-right: none;
+        }
+
+        .feature-card:nth-child(9),
+        .feature-card:nth-child(10) {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-title::before {
+            content: '✅';
+            font-size: 16px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .feature-code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #495057;
+            overflow: hidden;
+        }
+
+        /* Individual feature colors */
+        .feature-card:nth-child(1) .feature-icon {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+        }
+
+        .feature-card:nth-child(4) .feature-icon {
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+            color: white;
+        }
+
+        .feature-card:nth-child(5) .feature-icon {
+            background: linear-gradient(135deg, #00BCD4, #0097A7);
+            color: white;
+        }
+
+        .feature-card:nth-child(6) .feature-icon {
+            background: linear-gradient(135deg, #607D8B, #455A64);
+            color: white;
+        }
+
+        .feature-card:nth-child(7) .feature-icon {
+            background: linear-gradient(135deg, #E91E63, #C2185B);
+            color: white;
+        }
+
+        .feature-card:nth-child(8) .feature-icon {
+            background: linear-gradient(135deg, #3F51B5, #303F9F);
+            color: white;
+        }
+
+        .feature-card:nth-child(9) .feature-icon {
+            background: linear-gradient(135deg, #795548, #5D4037);
+            color: white;
+        }
+
+        .feature-card:nth-child(10) .feature-icon {
+            background: linear-gradient(135deg, #F44336, #D32F2F);
+            color: white;
+        }
+
+        .footer {
+            background: #212529;
+            color: white;
+            padding: 24px 40px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-stats {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .footer-stats span {
+            opacity: 0.8;
+        }
+
+        .footer-cta {
+            background: #0175C2;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-cta:hover {
+            background: #01579B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(1, 117, 194, 0.4);
+        }
+
+        .shimmer {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="features-container">
+        <div class="header">
+            <div class="header-content">
+                <h1>Flutter API Helper</h1>
+                <div class="subtitle">Complete HTTP Solution for Flutter Apps</div>
+                <div class="version">v1.0.0 • Production Ready</div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <div class="feature-content">
+                    <div class="feature-title">Simple API</div>
+                    <div class="feature-description">Intuitive methods for all HTTP operations</div>
+                    <div class="feature-code">ApiHelper.get&lt;List&gt;('/users')</div>
+                </div>
+                <div class="shimmer"></div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <div class="feature-content">
+                    <div class="feature-title">Smart Caching</div>
+                    <div class="feature-description">Memory and disk caching with configurable TTL</div>
+                    <div class="feature-code">cache: CacheConfig(duration: 5.minutes)</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-content">
+                    <div class="feature-title">Auto Retry</div>
+                    <div class="feature-description">Exponential backoff for failed requests</div>
+                    <div class="feature-code">retry: RetryConfig(maxRetries: 3)</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔑</div>
+                <div class="feature-content">
+                    <div class="feature-title">Token Management</div>
+                    <div class="feature-description">Automatic token refresh and injection</div>
+                    <div class="feature-code">getToken: () => TokenStorage.get()</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📁</div>
+                <div class="feature-content">
+                    <div class="feature-title">File Operations</div>
+                    <div class="feature-description">Upload/download with progress tracking</div>
+                    <div class="feature-code">uploadFile(path, onProgress: (sent, total))</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-content">
+                    <div class="feature-title">Network Aware</div>
+                    <div class="feature-description">Built-in connectivity checking</div>
+                    <div class="feature-code">Auto handles offline/online states</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-content">
+                    <div class="feature-title">Widget Integration</div>
+                    <div class="feature-description">Ready-to-use Flutter widgets</div>
+                    <div class="feature-code">ApiBuilder&lt;T&gt;(future, builder, loading)</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-content">
+                    <div class="feature-title">Type Safe</div>
+                    <div class="feature-description">Full generic type support</div>
+                    <div class="feature-code">ApiHelper.get&lt;User&gt;() → User</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <div class="feature-content">
+                    <div class="feature-title">Interceptors</div>
+                    <div class="feature-description">Custom request/response processing</div>
+                    <div class="feature-code">addInterceptor(AuthInterceptor())</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-content">
+                    <div class="feature-title">Error Handling</div>
+                    <div class="feature-description">Comprehensive error types and handling</div>
+                    <div class="feature-code">catch (ApiError e) { e.type, e.message }</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-left">
+                <div class="footer-stats">
+                    <span>✨ 10 Powerful Features</span>
+                    <span>📱 All Platforms</span>
+                    <span>🚀 Production Ready</span>
+                </div>
+            </div>
+            <a href="https://pub.dev/packages/flutter_api_helper" class="footer-cta" target="_blank">
+                Get Started on pub.dev
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
