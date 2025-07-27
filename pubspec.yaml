@@ -1,7 +1,7 @@
 name: flutter_api_helper
 description: "A powerful, easy-to-use API helper for Flutter that handles everything from simple GET requests to complex error handling, caching, and token management."
 
-publish_to: https://pub.dev
+publish_to: 'none'
 
 version: 1.0.0
 
